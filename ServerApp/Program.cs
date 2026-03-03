@@ -16,6 +16,8 @@
 // - Streamlining CORS policy to allow all headers and methods for rapid integration testing.
 // - Keeping the API minimal for fast iteration and debugging.
 var builder = WebApplication.CreateBuilder(args);
+// Add in-memory caching
+builder.Services.AddMemoryCache();
 
 // Add CORS to allow requests from ClientApp
 builder.Services.AddCors(options =>
@@ -32,26 +34,34 @@ app.UseCors(policy =>
     policy.AllowAnyOrigin()
           .AllowAnyMethod()
           .AllowAnyHeader());
-app.MapGet("/api/productlist", () =>
+// Use caching for product list endpoint
+app.MapGet("/api/productlist", (IMemoryCache cache) =>
 {
-    return new[]
+    const string cacheKey = "productlist";
+    if (!cache.TryGetValue(cacheKey, out object productList))
     {
-        new
+        productList = new[]
         {
-            id = 1,
-            name = "Laptop",
-            price = 1200.50,
-            stock = 25,
-            category = new { id = 101, name = "Electronics" }
-        },
-        new
-        {
-            id = 2,
-            name = "Headphones",
-            price = 50.00,
-            stock = 100,
-            category = new { id = 102, name = "Accessories" }
-        }
-    };
+            new
+            {
+                id = 1,
+                name = "Laptop",
+                price = 1200.50,
+                stock = 25,
+                category = new { id = 101, name = "Electronics" }
+            },
+            new
+            {
+                id = 2,
+                name = "Headphones",
+                price = 50.00,
+                stock = 100,
+                category = new { id = 102, name = "Accessories" }
+            }
+        };
+        // Cache for 5 minutes
+        cache.Set(cacheKey, productList, TimeSpan.FromMinutes(5));
+    }
+    return productList;
 });
 app.Run();
