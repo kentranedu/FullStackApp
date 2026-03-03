@@ -15,6 +15,7 @@
 // - Using anonymous types for quick prototyping of product data.
 // - Streamlining CORS policy to allow all headers and methods for rapid integration testing.
 // - Keeping the API minimal for fast iteration and debugging.
+using Microsoft.Extensions.Caching.Memory;
 var builder = WebApplication.CreateBuilder(args);
 // Add in-memory caching
 builder.Services.AddMemoryCache();
