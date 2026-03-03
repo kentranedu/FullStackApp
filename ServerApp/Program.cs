@@ -12,8 +12,11 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
-app.UseCors();
-app.MapGet("/api/products", () =>
+app.UseCors(policy =>
+    policy.AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader());
+app.MapGet("/api/productlist", () =>
 {
     return new[]
     {

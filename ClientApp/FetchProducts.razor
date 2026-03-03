@@ -21,7 +21,7 @@ else
     {
         try
         {
-            products = await Http.GetFromJsonAsync<Product[]>("http://localhost:5240/api/products");
+            products = await Http.GetFromJsonAsync<Product[]>("http://localhost:5240/api/productlist");
         }
         catch (HttpRequestException ex)
         {
