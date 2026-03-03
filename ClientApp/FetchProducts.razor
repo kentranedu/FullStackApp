@@ -1,4 +1,20 @@
 @page "/fetchproducts"
+<!--
+    This component was developed with assistance from GitHub Copilot (GPT-4.1).
+    Copilot contributed by:
+    - Suggesting the use of HttpClient and GetFromJsonAsync for API integration.
+    - Auto-generating the Product class structure based on API response.
+    - Recommending robust error handling for async API calls.
+    - Providing efficient Razor syntax for conditional rendering and looping.
+    Efficiency improvements:
+    - Copilot auto-completed repetitive code blocks (e.g., error handling, property definitions).
+    - Suggested concise async/await patterns for data fetching.
+    - Highlighted best practices for dependency injection and component initialization.
+    Optimizations:
+    - Using nullable reference types for safer data handling.
+    - Streamlining UI updates with conditional rendering for loading states.
+    - Structuring the Product class for easy extension and maintainability.
+-->
 <h3>Product List</h3>
 <ul>
 @if (products != null)
