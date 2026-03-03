@@ -17,8 +17,25 @@ else
     private Product[]? products;
     protected override async Task OnInitializedAsync()
     {
-        // API call logic will go here
-        products = await Http.GetFromJsonAsync<Product[]>("api/products");
+        try
+        {
+            products = await Http.GetFromJsonAsync<Product[]>("api/products");
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.Error.WriteLine($"Request error: {ex.Message}");
+            products = Array.Empty<Product>();
+        }
+        catch (TaskCanceledException ex)
+        {
+            Console.Error.WriteLine($"Request timed out: {ex.Message}");
+            products = Array.Empty<Product>();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Unexpected error: {ex.Message}");
+            products = Array.Empty<Product>();
+        }
     }
 
     public class Product
