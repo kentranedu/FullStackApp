@@ -1,0 +1,43 @@
+# Ignore build output folders
+bin/
+obj/
+**/bin/
+**/obj/
+# Ignore common compiled files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+*.vspscc
+*.user
+*.suo
+*.DS_Store
+*.db
+*.pyc
+*.class
+*.o
+*.so
+*.a
+*.out
+*.lib
+*.idb
+*.ipch
+*.aps
+*.ncb
+*.res
+*.tlh
+*.tli
+*.tmp
+*.bak
+*.swp
+*.swo
+*.sln.docstates
+# Ignore build output for Blazor
+ClientApp/wwwroot/_framework/
+ClientApp/bin/
+ClientApp/obj/
+ServerApp/bin/
+ServerApp/obj/
+# Ignore Visual Studio Code settings
+.vscode/

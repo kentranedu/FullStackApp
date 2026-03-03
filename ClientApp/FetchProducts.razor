@@ -14,12 +14,14 @@ else
 }
 </ul>
 @code {
+    [Inject]
+    private HttpClient Http { get; set; } = default!;
     private Product[]? products;
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            products = await Http.GetFromJsonAsync<Product[]>("api/products");
+            products = await Http.GetFromJsonAsync<Product[]>("http://localhost:5240/api/products");
         }
         catch (HttpRequestException ex)
         {
@@ -41,7 +43,7 @@ else
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public double Price { get; set; }
         public int Stock { get; set; }
     }

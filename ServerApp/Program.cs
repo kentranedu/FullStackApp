@@ -1,6 +1,18 @@
 //Minimal API Back-End (ServerApp.cs):
 var builder = WebApplication.CreateBuilder(args);
+
+// Add CORS to allow requests from ClientApp
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5216")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
+app.UseCors();
 app.MapGet("/api/products", () =>
 {
     return new[]
